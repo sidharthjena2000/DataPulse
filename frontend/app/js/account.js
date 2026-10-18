@@ -47,8 +47,6 @@
 
   function build() {
     var esc = DP.esc, p = profile(session);
-    var host = document.querySelector('.sidebar');
-    if (!host) return;
     var wrap = document.createElement('div');
     wrap.className = 'acct';
     wrap.innerHTML =
@@ -66,8 +64,7 @@
       '</dl>' +
       '<p class="acct-note">Name and organisation are inferred from the email address. Demo session: nothing is sent to a server.</p>' +
       '<button type="button" class="acct-out" id="acct-out">Sign out</button></div>';
-    var brand = host.querySelector('.brand');
-    host.insertBefore(wrap, brand ? brand.nextSibling : host.firstChild);
+    document.body.appendChild(wrap);
 
     var btn = document.getElementById('acct-btn'), menu = document.getElementById('acct-menu');
     function setOpen(on, refocus) {
