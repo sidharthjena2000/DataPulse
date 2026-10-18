@@ -56,7 +56,7 @@
     }
     if (el && /break|fail|impact|affect|depend/.test(s)) {
       var names = el.assets.map(function (a) { return esc(a.name) + (a.regulatory ? ' (regulatory)' : ''); });
-      return '<p>If <strong>' + esc(el.table.id + '.' + el.name) + '</strong> fails, ' + (names.length ? names.length + ' assets are affected: ' + names.join(', ') + '.' : 'no downstream assets read it.') +
+      return '<p>If <strong>' + esc(el.table.id + '.' + el.name) + '</strong> fails, ' + (names.length ? names.length + (names.length === 1 ? ' asset is' : ' assets are') + ' affected: ' + names.join(', ') + '.' : 'no downstream assets read it.') +
         ' <a href="#/impact?el=' + encodeURIComponent(el.id) + '">Open the impact simulation</a>.</p>';
     }
     if (el && /rule/.test(s)) {

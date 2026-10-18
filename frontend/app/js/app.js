@@ -14,6 +14,9 @@
     { group: 'Extensions', items: [
       { route: 'impact', label: 'Impact simulation' },
       { route: 'ask', label: 'Ask DataPulse' }
+    ] },
+    { group: 'Operations', items: [
+      { route: 'logs', label: 'Run logs' }
     ] }
   ];
 
@@ -169,6 +172,14 @@
     else fallback();
   }
 
+  function downloadLogs() {
+    var blob = new Blob([DP.logs.csv()], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'datapulse-run-logs.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+
   function ask(q) {
     q = q.trim();
     if (!q) return;
@@ -205,6 +216,9 @@
         if (window.confirm('Clear every accept and reject decision stored in this browser?')) DP.store.reset();
         break;
       case 'ask': ask(t.getAttribute('data-q')); break;
+      case 'log-tab': DP.ui.log.tab = val; renderMain(false); break;
+      case 'log-more': DP.ui.log.limit += 40; renderMain(false); break;
+      case 'log-export': downloadLogs(); break;
     }
   });
 
@@ -214,9 +228,19 @@
     else if (id === 'rule-el') { DP.ui.ruleEl = e.target.value; renderMain(false); }
     else if (id === 'rule-status') { DP.ui.ruleStatus = e.target.value; renderMain(false); }
     else if (id === 'impact-el') { DP.ui.impactEl = e.target.value; renderMain(false); }
+    else if (id === 'log-level' || id === 'log-type' || id === 'log-table') {
+      DP.ui.log[id.slice(4)] = e.target.value; DP.ui.log.limit = 40; renderMain(false);
+      var again = $('#' + id); if (again) again.focus({ preventScroll: true });
+    }
   });
 
   document.addEventListener('input', function (e) {
+    if (e.target.id === 'log-search') {
+      DP.ui.log.search = e.target.value; DP.ui.log.limit = 40;
+      var lp = DP.views.logs.partial;
+      $(lp.selector).innerHTML = lp.html(DP.ui);
+      return;
+    }
     if (e.target.id !== 'rec-search') return;
     DP.ui.recSearch = e.target.value;
     var p = DP.views.recommend.partial;
