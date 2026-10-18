@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataPulse</title>
+  <meta name="description" content="AI-driven discovery of critical and monitored data elements, with data quality rule suggestions on Databricks Unity Catalog.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#/overview" aria-label="DataPulse home">
+        <span class="brand-mark" aria-hidden="true">DP</span>
+        <span class="brand-text"><strong>DataPulse</strong><span>AI-driven data element discovery</span></span>
+      </a>
+      <nav id="nav" aria-label="Main"></nav>
+      <p class="side-foot">Sample data &middot; prototype<br>GBS Data &amp; Analytics &middot; Internal</p>
+    </aside>
+
+    <main id="main" class="main" tabindex="-1"></main>
+  </div>
+
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden></aside>
+
+  <dialog id="reject-dialog" class="dialog" aria-labelledby="reject-title">
+    <form id="reject-form">
+      <h2 id="reject-title">Reject recommendation</h2>
+      <p class="muted" id="reject-what"></p>
+      <label class="field-block" for="reject-reason">Reason
+        <select id="reject-reason" required></select>
+      </label>
+      <label class="field-block" for="reject-comment">Comment (optional)
+        <textarea id="reject-comment" rows="3" maxlength="300"></textarea>
+      </label>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-ghost" id="reject-cancel">Cancel</button>
+        <button type="submit" class="btn btn-reject">Reject</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/views/overview.js"></script>
+  <script src="js/views/discover.js"></script>
+  <script src="js/views/recommend.js"></script>
+  <script src="js/views/rules.js"></script>
+  <script src="js/views/review.js"></script>
+  <script src="js/views/impact.js"></script>
+  <script src="js/views/ask.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

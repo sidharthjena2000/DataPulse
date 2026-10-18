@@ -1,59 +1,180 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DataPulse</title>
-  <meta name="description" content="AI-driven discovery of critical and monitored data elements, with data quality rule suggestions on Databricks Unity Catalog.">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Sign in · DataPulse</title>
+  <meta name="description" content="Sign in to DataPulse to monitor critical data elements, validation runs, and data quality incidents.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#10171e">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='8' fill='%2310171e' stroke='%234db6d3' stroke-width='2'/%3E%3Cpath d='M6 16h5l3-8 4 16 3-8h5' fill='none' stroke='%234db6d3' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
 
-  <div class="app">
-    <aside class="sidebar">
-      <a class="brand" href="#/overview" aria-label="DataPulse home">
-        <span class="brand-mark" aria-hidden="true">DP</span>
-        <span class="brand-text"><strong>DataPulse</strong><span>AI-driven data element discovery</span></span>
+    <!-- Authentication -->
+    <section class="auth">
+      <a class="brand" href="./" aria-label="DataPulse">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="1" y="1" width="26" height="26" rx="7"/>
+          <path d="M5.5 14.5h4l2.5-7 4 13 2.5-6h4"/>
+        </svg>
+        DataPulse
       </a>
-      <nav id="nav" aria-label="Main"></nav>
-      <p class="side-foot">Sample data &middot; prototype<br>GBS Data &amp; Analytics &middot; Internal</p>
-    </aside>
 
-    <main id="main" class="main" tabindex="-1"></main>
+      <main class="auth-main">
+        <div class="auth-card">
+          <h1>Sign in to DataPulse</h1>
+          <p class="lede">Monitor critical data elements, validation runs, and quarantine rates across your catalog.</p>
+
+          <div class="seg" id="seg" data-active="email" role="tablist" aria-label="Sign-in method">
+            <button class="seg-tab" id="tab-email" type="button" role="tab" aria-selected="true" aria-controls="panel-email">Work email</button>
+            <button class="seg-tab" id="tab-key" type="button" role="tab" aria-selected="false" aria-controls="panel-key" tabindex="-1">API key</button>
+          </div>
+
+          <div id="banner-slot" aria-live="polite"></div>
+
+          <!-- Work email -->
+          <form class="form" id="panel-email" role="tabpanel" aria-labelledby="tab-email" novalidate>
+            <div class="field" data-field="email">
+              <label for="email">Work email</label>
+              <div class="control">
+                <input class="input has-adorn" id="email" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="name@company.com" aria-describedby="email-msg" required>
+                <span class="adorn adorn-ok" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>
+                </span>
+              </div>
+              <p class="msg" id="email-msg"></p>
+            </div>
+
+            <div class="field" data-field="password">
+              <div class="label-row">
+                <label for="password">Password</label>
+                <button class="link" type="button" id="forgot">Forgot password?</button>
+              </div>
+              <div class="control">
+                <input class="input has-adorn" id="password" name="password" type="password" autocomplete="current-password" aria-describedby="password-msg caps-msg" required>
+                <span class="adorn">
+                  <button class="reveal" type="button" data-reveal="password" aria-controls="password" aria-pressed="false" aria-label="Show password">Show</button>
+                </span>
+              </div>
+              <p class="msg" id="password-msg"></p>
+              <p class="msg msg-caps" id="caps-msg" hidden>Caps Lock is on.</p>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="remember" name="remember">
+              <span>Remember my email on this device</span>
+            </label>
+
+            <button class="btn btn-primary" type="submit" data-submit>
+              <span class="btn-label">Sign in</span>
+            </button>
+          </form>
+
+          <!-- API key -->
+          <form class="form" id="panel-key" role="tabpanel" aria-labelledby="tab-key" novalidate hidden>
+            <div class="field" data-field="workspace">
+              <label for="workspace">Workspace</label>
+              <div class="control">
+                <input class="input mono has-adorn" id="workspace" name="workspace" type="text" autocomplete="organization" autocapitalize="none" spellcheck="false" placeholder="gbs-health-prod" aria-describedby="workspace-msg" required>
+                <span class="adorn adorn-ok" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>
+                </span>
+              </div>
+              <p class="msg" id="workspace-msg" data-hint="Lowercase letters, numbers, and hyphens."></p>
+            </div>
+
+            <div class="field" data-field="apikey">
+              <label for="apikey">API key</label>
+              <div class="control">
+                <input class="input mono has-adorn" id="apikey" name="apikey" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="dp_live_xxxxxxxxxxxxxxxx" aria-describedby="apikey-msg" required>
+                <span class="adorn">
+                  <button class="reveal" type="button" data-reveal="apikey" aria-controls="apikey" aria-pressed="false" aria-label="Show API key">Show</button>
+                </span>
+              </div>
+              <p class="msg" id="apikey-msg" data-hint="Create keys under Settings, API access. Each key is scoped to one workspace."></p>
+            </div>
+
+            <button class="btn btn-primary" type="submit" data-submit>
+              <span class="btn-label">Sign in with API key</span>
+            </button>
+          </form>
+
+          <div id="sso-block">
+            <div class="divider">or continue with single sign-on</div>
+            <div class="sso-grid">
+              <button class="btn btn-secondary" type="button" data-sso="Okta">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l5.5 2v4c0 3.2-2.3 5.6-5.5 7-3.2-1.4-5.5-3.8-5.5-7v-4l5.5-2z"/></svg>
+                <span class="btn-label">Okta</span>
+              </button>
+              <button class="btn btn-secondary" type="button" data-sso="Microsoft Entra ID">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l5.5 2v4c0 3.2-2.3 5.6-5.5 7-3.2-1.4-5.5-3.8-5.5-7v-4l5.5-2z"/></svg>
+                <span class="btn-label">Microsoft Entra ID</span>
+              </button>
+            </div>
+            <p class="fine">Your administrator enables SAML 2.0 per workspace. Access is granted by your identity provider.</p>
+          </div>
+        </div>
+      </main>
+
+      <footer class="auth-foot">
+        <ul class="assurances" aria-label="Security and compliance status">
+          <li>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l5.5 2v4c0 3.2-2.3 5.6-5.5 7-3.2-1.4-5.5-3.8-5.5-7v-4l5.5-2z"/></svg>
+            SOC 2 Type II <em>on roadmap</em>
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5l5.5 2v4c0 3.2-2.3 5.6-5.5 7-3.2-1.4-5.5-3.8-5.5-7v-4l5.5-2z"/></svg>
+            HIPAA safeguards <em>on roadmap</em>
+          </li>
+          <li>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>
+            SAML 2.0 SSO <em>planned</em>
+          </li>
+        </ul>
+        <p class="fine">Demo environment. It opens a sample workspace; no credentials leave this browser.</p>
+      </footer>
+    </section>
+
+    <!-- Product preview -->
+    <section class="hero" aria-label="Sample validation run">
+      <div class="hero-inner">
+        <div>
+          <h2 class="hero-title">Catch failing data before it reaches a report.</h2>
+          <p class="hero-sub">DataPulse validates your critical data elements on every pipeline run, then ties each failure to its rule, table, and owner.</p>
+        </div>
+
+        <div class="console">
+          <div class="console-head">
+            <div class="console-id">
+              <span class="chip" id="chip" data-state="ready"><i></i><span id="chip-text">Ready</span></span>
+              <span class="mono">dq-run-8412</span>
+            </div>
+            <button class="ghost" type="button" id="replay" disabled>Replay</button>
+          </div>
+          <p class="console-meta mono">gbs_health_prod · sample run · 6 of 66 rules shown</p>
+          <div class="bar" id="bar"><i></i></div>
+          <div class="rows" id="rows"></div>
+          <div class="console-sum" id="sum"></div>
+        </div>
+
+        <dl class="health" id="health"></dl>
+
+        <div class="alerts" id="alerts"></div>
+
+        <p class="hero-note">Sample data from the demo catalog. Live figures appear once a workspace is connected.</p>
+      </div>
+    </section>
+
   </div>
 
-  <div id="scrim" class="scrim" hidden></div>
-  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden></aside>
-
-  <dialog id="reject-dialog" class="dialog" aria-labelledby="reject-title">
-    <form id="reject-form">
-      <h2 id="reject-title">Reject recommendation</h2>
-      <p class="muted" id="reject-what"></p>
-      <label class="field-block" for="reject-reason">Reason
-        <select id="reject-reason" required></select>
-      </label>
-      <label class="field-block" for="reject-comment">Comment (optional)
-        <textarea id="reject-comment" rows="3" maxlength="300"></textarea>
-      </label>
-      <div class="dialog-actions">
-        <button type="button" class="btn btn-ghost" id="reject-cancel">Cancel</button>
-        <button type="submit" class="btn btn-reject">Reject</button>
-      </div>
-    </form>
-  </dialog>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <script src="js/data.js"></script>
-  <script src="js/core.js"></script>
-  <script src="js/views/overview.js"></script>
-  <script src="js/views/discover.js"></script>
-  <script src="js/views/recommend.js"></script>
-  <script src="js/views/rules.js"></script>
-  <script src="js/views/review.js"></script>
-  <script src="js/views/impact.js"></script>
-  <script src="js/views/ask.js"></script>
-  <script src="js/app.js"></script>
+  <script src="assets/js/login.js"></script>
+  <script src="assets/js/hero.js"></script>
 </body>
 </html>
