@@ -37,6 +37,8 @@
           ok: true,
           session: {
             method: method,
+            email: payload.email || '',
+            workspace: payload.workspace || '',
             subject: payload.email || payload.workspace,
             workspace: "gbs_health_prod",
             issuedAt: new Date().toISOString(),
@@ -282,6 +284,12 @@
       : "Enter your work email first. In a connected workspace, a reset link is sent to that address.");
     if (!email || !RE_EMAIL.test(email)) $("#email").focus();
   });
+
+  /* ---- Signed-out notice ---- */
+  if (/[?&]signed_out=1/.test(window.location.search)) {
+    showBanner("ok", "You have been signed out.");
+    try { window.history.replaceState(null, "", window.location.pathname); } catch (e) { /* ignore */ }
+  }
 
   /* ---- Prefill remembered email ---- */
   var saved = read("localStorage", EMAIL_KEY);

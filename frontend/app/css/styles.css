@@ -401,3 +401,23 @@ body.cp-on .cp-fab { display: none; }
 .main { min-width: 0; }
 table.data td.mono { overflow-wrap: anywhere; }
 table.data .btn-sm { white-space: nowrap; }
+
+/* ---- Account menu ---- */
+.acct { position: relative; margin-top: -8px; }
+.acct-btn { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 10px; background: rgba(255, 255, 255, .06); color: #fff; cursor: pointer; text-align: left; }
+.acct-btn:hover, .acct-btn[aria-expanded="true"] { background: rgba(255, 255, 255, .14); }
+.acct-btn:focus-visible { outline-color: var(--yellow); }
+.acct-av { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--yellow); color: var(--navy); display: grid; place-items: center; font-weight: 700; font-size: .8rem; }
+.acct-who { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.acct-who strong { font-size: .94rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acct-who span { font-size: .75rem; opacity: .75; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acct-menu { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 20; background: var(--panel); color: var(--text); border-radius: 10px; box-shadow: 0 12px 32px rgba(23, 42, 76, .35); padding: 12px 14px; min-width: 240px; }
+.acct-menu[hidden] { display: none; }
+.acct-menu dl { margin: 0; display: grid; gap: 8px; }
+.acct-menu dt { font-size: .72rem; color: var(--muted); }
+.acct-menu dd { margin: 0; font-size: .92rem; overflow-wrap: anywhere; }
+.acct-menu dd span { display: block; font-size: .78rem; color: var(--muted); }
+.acct-note { margin: 10px 0; font-size: .75rem; color: var(--muted); }
+.acct-out { width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--red); font-weight: 700; cursor: pointer; }
+.acct-out:hover { background: var(--red-t); }
+@media (max-width: 860px) { .acct { margin-top: 0; flex: 1; min-width: 220px; } .sidebar .brand { flex: none; } }
